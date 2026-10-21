@@ -12,6 +12,6 @@ const { settings } = Astro.props;
     <Reveal>
       {settings.photo ? <div class="organic-photo aspect-[4/5] overflow-hidden border border-ink-800 bg-ink-900"><img src={settings.photo} loading="lazy" decoding="async" class="h-full w-full object-cover" alt="Retrato de Welly, editor e motion designer"/></div> : <div class="organic-photo frame-grid relative grid aspect-[4/5] place-items-center overflow-hidden border border-ink-800 bg-ink-900" aria-label="Identidade gráfica de Wellymotion"><div class="absolute inset-7 border border-ink-600/70"></div><div class="relative"><span class="block text-[clamp(8rem,24vw,15rem)] font-bold leading-none tracking-[-.15em] text-ink-100">W<span class="text-lime">.</span></span><span class="mono block text-center text-xs tracking-[.2em] text-ink-400">EDITOR / MOTION</span></div><span class="mono absolute bottom-9 left-9 text-[10px] text-gold">FRAME 001 — PARÁ</span></div>}
     </Reveal>
-    <Reveal><h2 class="section-title">Por trás<br/>dos <span class="text-lime">cortes.</span></h2><p class="mt-8 whitespace-pre-line text-[16px] leading-[1.75] text-ink-400">{settings.bio}</p><div class="mt-8 flex flex-wrap gap-2"><Tag text="Adobe Premiere"/><Tag text="After Effects"/><Tag text="Pará · Remoto"/></div></Reveal>
+    <Reveal><h2 class="section-title">Por trás<br/>dos <span class="text-lime">cortes.</span></h2><p class="mt-8 whitespace-pre-line text-[16px] leading-[1.75] text-ink-400">{settings.bio}</p><div class="mt-8 flex flex-wrap gap-2"><Tag text="Adobe Premiere"/><Tag text="After Effects"/>
   </div>
 </div></section>
