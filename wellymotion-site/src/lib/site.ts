@@ -5,5 +5,5 @@ export const SITE = {
   instagram: 'https://instagram.com/wellymotion',
   instagramHandle: '@wellymotion',
   email: '', // [CONFIRMAR] contato@wellymotion.com — não exibir até confirmar.
-  location: 'Pará, Brasil · Remoto',
+  location: 'Pará, Brasil',
 };
