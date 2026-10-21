@@ -1,0 +1,6 @@
+---
+import { cn } from '../../lib/utils';
+interface Props { href: string; variant?: 'primary'|'outline'|'link'; class?: string; external?: boolean; label?: string; }
+const { href, variant = 'primary', external = false, label, class: className = '' } = Astro.props;
+---
+<a href={href} class={cn('btn',`btn-${variant}`,className)} aria-label={label} target={external?'_blank':undefined} rel={external?'noopener noreferrer':undefined}><slot /></a>

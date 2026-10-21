@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/sections/Hero.astro';
+import Services from '../components/sections/Services.astro';
+import Process from '../components/sections/Process.astro';
+import Works from '../components/sections/Works.astro';
+import About from '../components/sections/About.astro';
+import Contact from '../components/sections/Contact.astro';
+import { getFeaturedProjects, getSiteSettings } from '../lib/sanity';
+const [projects, settings] = await Promise.all([getFeaturedProjects(),getSiteSettings()]);
+---
+<Base><Hero/><Services/><Process/><Works projects={projects}/><About settings={settings}/><Contact/></Base>

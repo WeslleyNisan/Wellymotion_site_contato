@@ -1,0 +1,33 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "wellymotion-site": {
+      "root": "wellymotion-site",
+      "framework": "astro"
+    },
+    "studio": {
+      "root": "wellymotion-site/studio",
+      "framework": "sanity"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/studio",
+      "destination": {
+        "service": "studio"
+      }
+    },
+    {
+      "source": "/studio/(.*)",
+      "destination": {
+        "service": "studio"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "wellymotion-site"
+      }
+    }
+  ]
+}

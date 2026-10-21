@@ -1,0 +1,16 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+import Reveal from '../ui/Reveal.astro';
+const steps = [
+ {num:'01',title:'Envio',detail:'Envie o material e as referências.'},
+ {num:'02',title:'Edição',detail:'Monto os cortes e o motion.'},
+ {num:'03',title:'Ajustes',detail:'Você revisa e alinhamos os detalhes.'},
+ {num:'04',title:'Entrega',detail:'Arquivo final, pronto para publicar.'},
+];
+---
+<section id="processo" class="section border-t border-ink-800"><div class="container">
+  <Reveal><SectionLabel number="02"/><h2 class="section-title mt-6">Sem mistério.<br/><span class="text-lime">Só processo.</span></h2><p class="lead mt-6">Do material ao vídeo final.</p></Reveal>
+  <div class="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    {steps.map(step => <Reveal><article class="organic-card h-full min-h-60 border border-ink-800 bg-ink-900 p-6"><div class="mono mb-10 text-[12px] text-gold">{step.num} <span class="text-ink-600">/ 04</span></div><h3 class="text-[25px] font-semibold tracking-[-.05em]">{step.title}</h3><p class="mt-3 text-sm leading-7 text-[#a9ae9e]">{step.detail}</p></article></Reveal>)}
+  </div>
+</div></section>

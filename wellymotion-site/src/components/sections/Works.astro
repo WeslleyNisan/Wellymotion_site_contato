@@ -1,0 +1,15 @@
+---
+import { ArrowUpRight } from 'lucide-astro';
+import SectionLabel from '../ui/SectionLabel.astro';
+import Reveal from '../ui/Reveal.astro';
+import Button from '../ui/Button.astro';
+import VideoCard from '../media/VideoCard.astro';
+import WhatsAppButton from '../ui/WhatsAppButton.astro';
+import type { Project } from '../../lib/types';
+interface Props { projects: Project[]; }
+const { projects } = Astro.props;
+---
+<section id="trabalhos" class="section border-t border-ink-800"><div class="container">
+  <Reveal><SectionLabel number="03"/><div class="mb-12 mt-6 flex flex-wrap items-end justify-between gap-6"><div><h2 class="section-title">Trabalhos.<br/><span class="text-lime">Na prática.</span></h2><p class="lead mt-5">Dê o play. Veja o resultado.</p></div><Button href="/trabalhos" variant="outline">Ver todos os trabalhos <ArrowUpRight size={17}/></Button></div></Reveal>
+  {projects.length ? <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{projects.map((project,index)=><Reveal><VideoCard project={project} index={index}/></Reveal>)}</div> : <Reveal><div class="organic-panel relative overflow-hidden border border-dashed border-ink-600 bg-ink-900 px-6 py-16 sm:px-12"><div class="mono mb-4 text-[11px] text-gold">PRJ.00 / EM PREPARAÇÃO</div><h3 class="max-w-[550px] text-3xl font-semibold tracking-[-.05em] sm:text-4xl">Os trabalhos chegam aqui em breve.</h3><p class="mt-4 max-w-xl leading-7 text-[#a9ae9e]">Estou preparando a seleção. Tem um projeto? Vamos conversar.</p><div class="mt-7"><WhatsAppButton>Falar do meu projeto <ArrowUpRight size={18}/></WhatsAppButton></div></div></Reveal>}
+</div></section>

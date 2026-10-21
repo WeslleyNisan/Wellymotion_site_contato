@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import Nav from '../components/sections/Nav.astro';
+import Footer from '../components/sections/Footer.astro';
+import { SITE } from '../lib/site';
+interface Props { title?: string; description?: string; ogImage?: string; }
+const { title = SITE.title, description = SITE.description, ogImage } = Astro.props;
+const canonical = new URL(Astro.url.pathname, import.meta.env.PUBLIC_SITE_URL || Astro.url.origin).href;
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#F5FAF4" />
+  <meta name="description" content={description}/>
+  <meta property="og:site_name" content="Wellymotion"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content={title}/>
+  <meta property="og:description" content={description}/>
+  {ogImage && <meta property="og:image" content={new URL(ogImage, canonical).href}/>}
+  <link rel="canonical" href={canonical}/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <title>{title}</title>
+</head>
+<body>
+  <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[90] focus:bg-lime focus:p-3 focus:text-ink-950">Pular para conteúdo</a>
+  <Nav/>
+  <main id="conteudo"><slot /></main>
+  <Footer/>
+  <script>
+    const blocks = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce || !('IntersectionObserver' in window)) {
+      blocks.forEach(x => x.classList.add('is-visible'));
+    } else {
+      const obs = new IntersectionObserver((entries, observer) => {
+        for (const entry of entries) if(entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      },{threshold:.08,rootMargin:'0px 0px -25px 0px'});
+      blocks.forEach(x => obs.observe(x));
+    }
+  </script>
+</body>
+</html>

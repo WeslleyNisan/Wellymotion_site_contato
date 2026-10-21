@@ -1,0 +1,8 @@
+---
+import { cn } from '../../lib/utils';
+interface Props { variant?: 'primary'|'outline'|'link'; class?: string; formClass?: string; label?: string; }
+const { variant = 'primary', label, class: className = '', formClass = '' } = Astro.props;
+---
+<form action="/api/contato" method="POST" target="_blank" class={formClass}>
+  <button type="submit" class={cn('btn', `btn-${variant}`, className)} aria-label={label}><slot /></button>
+</form>

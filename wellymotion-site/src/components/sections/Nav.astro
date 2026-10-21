@@ -1,0 +1,48 @@
+---
+import { ArrowUpRight, Menu, X } from 'lucide-astro';
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/';
+---
+<header class="nav-shell fixed left-0 right-0 top-0 z-50 border-b border-ink-800/80">
+  <div class="container flex h-[76px] items-center justify-between gap-5">
+    <a href="/" aria-label="Wellymotion — voltar para a página inicial" class="group flex items-center gap-2 text-xl font-bold tracking-[-.06em]">welly<span class="text-lime">motion</span><span class="ml-1 h-2 w-2 rounded-full bg-lime transition-transform group-hover:scale-150"></span></a>
+    <nav class="desktop-nav flex items-center gap-7 text-[13px] font-semibold" aria-label="Navegação principal">
+      <a href={isHome?'#servicos':'/#servicos'} class="nav-link">Serviços</a>
+      <a href="/trabalhos" class="nav-link" aria-current={currentPath.startsWith('/trabalhos')?'page':undefined}>Trabalhos</a>
+      <a href={isHome?'#sobre':'/#sobre'} class="nav-link">Sobre</a>
+      <a href={isHome?'#contato':'/#contato'} class="nav-link">Contato</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <form action="/api/contato" method="POST" target="_blank" class="desktop-nav"><button type="submit" class="btn btn-primary !px-4 !py-3 !text-xs">Pedir orçamento <ArrowUpRight size={16}/></button></form>
+      <button type="button" id="menu-button" class="rounded-full border border-ink-600 p-2.5 text-ink-100 md:hidden" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav"><Menu size={21}/></button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="container border-t border-ink-800 bg-ink-950 py-4 md:hidden" hidden aria-label="Navegação móvel">
+    <div class="flex flex-col gap-4 text-sm font-semibold">
+      <a href={isHome?'#servicos':'/#servicos'}>Serviços</a><a href="/trabalhos">Trabalhos</a><a href={isHome?'#sobre':'/#sobre'}>Sobre</a><a href={isHome?'#contato':'/#contato'}>Contato</a>
+      <form action="/api/contato" method="POST" target="_blank"><button type="submit" class="cursor-pointer text-left text-lime">Pedir orçamento ↗</button></form>
+    </div>
+  </nav>
+</header>
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('#menu-button');
+  const menu = document.querySelector<HTMLElement>('#mobile-nav');
+  btn?.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.setAttribute('aria-label', open ? 'Abrir menu' : 'Fechar menu');
+    if (menu) menu.hidden = open;
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu && !menu.hidden) {
+      menu.hidden = true;
+      btn?.setAttribute('aria-expanded','false');
+      btn?.setAttribute('aria-label','Abrir menu');
+      btn?.focus();
+    }
+  });
+  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    if(menu) menu.hidden = true;
+    btn?.setAttribute('aria-expanded','false');
+  }));
+</script>
